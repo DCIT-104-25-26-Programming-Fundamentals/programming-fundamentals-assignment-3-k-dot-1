@@ -73,5 +73,126 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require('readline-sync');
 
+// -----------------------------------------------------------------------------
+// Arithmetic Functions
+// -----------------------------------------------------------------------------
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a / b;
+}
+
+function modulus(a, b) {
+    if (b === 0) {
+        return null;
+    }
+    return a % b;
+}
+
+function exponentiation(base, exp) {
+    return Math.pow(base, exp);
+}
+
+// -----------------------------------------------------------------------------
+// Display Menu Options
+// -----------------------------------------------------------------------------
+function displayMenu() {
+    console.log("\n============================");
+    console.log("       SIMPLE CALCULATOR     ");
+    console.log("============================");
+    console.log("1. Addition");
+    console.log("2. Subtraction");
+    console.log("3. Multiplication");
+    console.log("4. Division");
+    console.log("5. Modulus");
+    console.log("6. Exponentiation");
+    console.log("7. Quit");
+}
+
+// -----------------------------------------------------------------------------
+// Main execution function
+// -----------------------------------------------------------------------------
+function main() {
+    let choice;
+    
+    do {
+        displayMenu();
+        choice = readlineSync.questionInt("Select an operation (1-7): ");
+        
+        if (choice === 7) {
+            console.log("Goodbye!");
+            break;
+        }
+        
+        if (choice < 1 || choice > 7) {
+            console.log("Error: Invalid choice. Please select an option from 1 to 7.");
+            continue;
+        }
+        
+        let num1 = readlineSync.questionFloat("Enter first number : ");
+        let num2 = readlineSync.questionFloat("Enter second number: ");
+        
+        switch (choice) {
+            case 1: {
+                let res = add(num1, num2);
+                console.log(`Result: ${num1} + ${num2} = ${res.toFixed(2)}`);
+                break;
+            }
+            case 2: {
+                let res = subtract(num1, num2);
+                console.log(`Result: ${num1} - ${num2} = ${res.toFixed(2)}`);
+                break;
+            }
+            case 3: {
+                let res = multiply(num1, num2);
+                console.log(`Result: ${num1} * ${num2} = ${res.toFixed(2)}`);
+                break;
+            }
+            case 4: {
+                let res = divide(num1, num2);
+                if (res === null) {
+                    console.log("Error: Cannot divide by zero.");
+                } else {
+                    console.log(`Result: ${num1} / ${num2} = ${res.toFixed(2)}`);
+                }
+                break;
+            }
+            case 5: {
+                let res = modulus(num1, num2);
+                if (res === null) {
+                    console.log("Error: Cannot perform modulus with zero divisor.");
+                } else {
+                    console.log(`Result: ${num1} % ${num2} = ${res.toFixed(2)} (remainder)`);
+                }
+                break;
+            }
+            case 6: {
+                let res = exponentiation(num1, num2);
+                console.log(`Result: ${num1} ^ ${num2} = ${res.toFixed(2)}`);
+                break;
+            }
+            default:
+                console.log("Error: Invalid operation choice.");
+                break;
+        }
+        
+    } while (choice !== 7);
+}
+
+main();
 

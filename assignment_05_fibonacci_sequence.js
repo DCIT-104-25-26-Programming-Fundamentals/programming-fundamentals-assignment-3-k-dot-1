@@ -53,5 +53,93 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require('readline-sync');
 
+// -----------------------------------------------------------------------------
+// PART A — Print the First N Terms
+// -----------------------------------------------------------------------------
+function printFibonacciSequence(n) {
+    if (n <= 0) {
+        console.log("Error: Number of terms must be positive.");
+        return;
+    }
+
+    let sequence = [];
+    
+    if (n >= 1) {
+        sequence.push(0);
+    }
+    if (n >= 2) {
+        sequence.push(1);
+    }
+
+    let t1 = 0;
+    let t2 = 1;
+
+    for (let i = 3; i <= n; i++) {
+        let nextTerm = t1 + t2;
+        sequence.push(nextTerm);
+        t1 = t2;
+        t2 = nextTerm;
+    }
+
+    console.log(`Fibonacci sequence: ${sequence.join(' ')}`);
+}
+
+// -----------------------------------------------------------------------------
+// PART B — Check if a Number Belongs to the Sequence
+// -----------------------------------------------------------------------------
+function isFibonacciNumber(num) {
+    if (num < 0) {
+        return false;
+    }
+    
+    if (num === 0 || num === 1) {
+        return true;
+    }
+
+    let t1 = 0;
+    let t2 = 1;
+    let current = t1 + t2;
+
+    while (current <= num) {
+        if (current === num) {
+            return true;
+        }
+        t1 = t2;
+        t2 = current;
+        current = t1 + t2;
+    }
+
+    return false;
+}
+
+// -----------------------------------------------------------------------------
+// Main execution function
+// -----------------------------------------------------------------------------
+function main() {
+    console.log("Select Task:");
+    console.log("1. Print First N Terms (Part A)");
+    console.log("2. Check if Number is Fibonacci (Part B)");
+    let choice = readlineSync.questionInt("Enter choice (1-2): ");
+
+    if (choice === 1) {
+        let n = readlineSync.questionInt("How many terms? ");
+        printFibonacciSequence(n);
+    } 
+    else if (choice === 2) {
+        let num = readlineSync.questionFloat("Enter a number to check: ");
+
+        if (isFibonacciNumber(num)) {
+            console.log(`${num} is a Fibonacci number.`);
+        } else {
+            console.log(`${num} is NOT a Fibonacci number.`);
+        }
+    } 
+    else {
+        console.log("Invalid choice selected.");
+    }
+}
+
+main();
 

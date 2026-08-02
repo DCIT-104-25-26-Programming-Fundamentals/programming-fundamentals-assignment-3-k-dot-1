@@ -58,5 +58,62 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require('readline-sync');
 
+// -----------------------------------------------------------------------------
+// PART A — Single Table
+// -----------------------------------------------------------------------------
+function printSingleTable(num) {
+    console.log(`\nMultiplication Table for ${num}:`);
+    for (let i = 1; i <= 12; i++) {
+        console.log(`${num} x ${i} = ${num * i}`);
+    }
+}
+
+// -----------------------------------------------------------------------------
+// PART B — Bonus: Tables from 1 to N
+// -----------------------------------------------------------------------------
+function printTablesUpToN(n) {
+    if (n <= 0) {
+        console.log("Error: N must be a positive integer.");
+        return;
+    }
+
+    for (let i = 1; i <= n; i++) {
+        printSingleTable(i);
+        if (i < n) {
+            console.log("---------------------------");
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Main execution function
+// -----------------------------------------------------------------------------
+function main() {
+    console.log("Select Option:");
+    console.log("1. Single Multiplication Table (Part A)");
+    console.log("2. Tables from 1 to N (Part B)");
+    let choice = readlineSync.questionInt("Enter choice (1-2): ");
+
+    if (choice === 1) {
+        let num = readlineSync.questionInt("Enter a number: ");
+        printSingleTable(num);
+    } 
+    else if (choice === 2) {
+        let n = readlineSync.questionInt("Enter a number N: ");
+        
+        if (n <= 0) {
+            console.log("Error: N must be a positive integer.");
+            return;
+        }
+        
+        printTablesUpToN(n);
+    } 
+    else {
+        console.log("Invalid choice selected.");
+    }
+}
+
+main();
 
